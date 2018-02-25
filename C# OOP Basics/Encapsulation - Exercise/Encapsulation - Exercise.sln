@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2027
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.ClassBox", "01.ClassBox\01.ClassBox.csproj", "{DF28E600-ED98-41B8-A017-88C9AA46CF5C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.ClassBox", "01.ClassBox\01.ClassBox.csproj", "{DF28E600-ED98-41B8-A017-88C9AA46CF5C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.ClassBoxDataValidation", "02.ClassBoxDataValidation\02.ClassBoxDataValidation.csproj", "{57F65747-4DEB-4EF1-9CEA-93B6F60C0AAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.ClassBoxDataValidation", "02.ClassBoxDataValidation\02.ClassBoxDataValidation.csproj", "{57F65747-4DEB-4EF1-9CEA-93B6F60C0AAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.AnimalFarm", "03.AnimalFarm\03.AnimalFarm.csproj", "{16FA7D21-BE2F-4379-8E46-D383C699DB11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.AnimalFarm", "03.AnimalFarm\03.AnimalFarm.csproj", "{16FA7D21-BE2F-4379-8E46-D383C699DB11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.ShoppingSpree", "04.ShoppingSpree\04.ShoppingSpree.csproj", "{51297BE7-D244-49CB-87C5-593F9EAC2A81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.ShoppingSpree", "04.ShoppingSpree\04.ShoppingSpree.csproj", "{51297BE7-D244-49CB-87C5-593F9EAC2A81}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.PizzaCalories", "05.PizzaCalories\05.PizzaCalories.csproj", "{FF7DF77E-B3DE-4E9F-B611-17A1C107E346}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{51297BE7-D244-49CB-87C5-593F9EAC2A81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51297BE7-D244-49CB-87C5-593F9EAC2A81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51297BE7-D244-49CB-87C5-593F9EAC2A81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF7DF77E-B3DE-4E9F-B611-17A1C107E346}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF7DF77E-B3DE-4E9F-B611-17A1C107E346}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF7DF77E-B3DE-4E9F-B611-17A1C107E346}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF7DF77E-B3DE-4E9F-B611-17A1C107E346}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
