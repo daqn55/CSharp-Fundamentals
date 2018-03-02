@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.DefineAnInterfaceIPerson", "01.DefineAnInterfaceIPerson\01.DefineAnInterfaceIPerson.csproj", "{9A832935-FC27-4F6A-BB0F-FE2C9EDB8D51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.DefineAnInterfaceIPerson", "01.DefineAnInterfaceIPerson\01.DefineAnInterfaceIPerson.csproj", "{9A832935-FC27-4F6A-BB0F-FE2C9EDB8D51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.MultipleImplementation", "02.MultipleImplementation\02.MultipleImplementation.csproj", "{F43A514E-566D-461E-B9C5-13AB03C5FA8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.MultipleImplementation", "02.MultipleImplementation\02.MultipleImplementation.csproj", "{F43A514E-566D-461E-B9C5-13AB03C5FA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Ferrari", "03.Ferrari\03.Ferrari.csproj", "{B6D333C1-3CCB-4967-B0F0-0A19031EAFAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.Ferrari", "03.Ferrari\03.Ferrari.csproj", "{B6D333C1-3CCB-4967-B0F0-0A19031EAFAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.Telephony", "04.Telephony\04.Telephony.csproj", "{B360BB82-AA5F-4F5B-92A2-D7D4744A33A8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.Telephony", "04.Telephony\04.Telephony.csproj", "{B360BB82-AA5F-4F5B-92A2-D7D4744A33A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.BorderControl", "05.BorderControl\05.BorderControl.csproj", "{8DAEC23D-D6BE-40A0-BD9F-33C28FE6F979}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{B360BB82-AA5F-4F5B-92A2-D7D4744A33A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B360BB82-AA5F-4F5B-92A2-D7D4744A33A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B360BB82-AA5F-4F5B-92A2-D7D4744A33A8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DAEC23D-D6BE-40A0-BD9F-33C28FE6F979}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DAEC23D-D6BE-40A0-BD9F-33C28FE6F979}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DAEC23D-D6BE-40A0-BD9F-33C28FE6F979}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DAEC23D-D6BE-40A0-BD9F-33C28FE6F979}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
