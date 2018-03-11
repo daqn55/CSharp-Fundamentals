@@ -47,8 +47,26 @@ namespace Forum.App.Services
 
                 return SignUpStatus.Success;
             }
-
+                
             return SignUpStatus.UsernameTakenError;
+        }
+
+        internal static User GetUser(string username)
+        {
+            ForumData forumData = new ForumData();
+
+            User user = forumData.Users.Find(u => u.Username == username);
+
+            return user;
+        }
+
+        internal static User GetUser(int userId)
+        {
+            ForumData forumData = new ForumData();
+
+            User user = forumData.Users.Find(u => u.Id == userId);
+
+            return user;
         }
     }
 }

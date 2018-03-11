@@ -168,12 +168,21 @@ namespace Forum.Data
                 var content = args[2];
                 var categoryId = int.Parse(args[3]);
                 var authorId = int.Parse(args[4]);
-                var replyIds = args[5]
+                if (args.Length > 5)
+                {
+                    var replyIds = args[5]
                     .Split(',', StringSplitOptions.RemoveEmptyEntries)
                     .Select(int.Parse)
                     .ToArray();
-                Post post = new Post(id, title, content, categoryId, authorId, replyIds);
-                posts.Add(post);
+                    Post post = new Post(id, title, content, categoryId, authorId, replyIds);
+                    posts.Add(post);
+                }
+                else
+                {
+                    Post post = new Post(id, title, content, categoryId, authorId, new List<int>());
+                    posts.Add(post);
+                }
+
             }
 
             return posts;
