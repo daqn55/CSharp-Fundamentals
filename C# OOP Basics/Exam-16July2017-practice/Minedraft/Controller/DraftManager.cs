@@ -26,15 +26,15 @@ public class DraftManager
 
     public string RegisterHarvester(List<string> arguments)
     {
-        string type = arguments[1];
-        string id = arguments[2];
-        double oreOutput = double.Parse(arguments[3]);
-        double energyRequirement = double.Parse(arguments[4]);
+        string type = arguments[0];
+        string id = arguments[1];
+        double oreOutput = double.Parse(arguments[2]);
+        double energyRequirement = double.Parse(arguments[3]);
         try
         {
             if (type == "Sonic")
             {
-                int sonicFactor = int.Parse(arguments[5]);
+                int sonicFactor = int.Parse(arguments[4]);
                 SonicHarvester sonicHarvester = new SonicHarvester(id, oreOutput, energyRequirement, sonicFactor);
                 harvesters.Add(sonicHarvester);
             }
@@ -53,9 +53,9 @@ public class DraftManager
     }
     public string RegisterProvider(List<string> arguments)
     {
-        string type = arguments[1];
-        string id = arguments[2];
-        double energyOutput = double.Parse(arguments[3]);
+        string type = arguments[0];
+        string id = arguments[1];
+        double energyOutput = double.Parse(arguments[2]);
         try
         {
             if (type == "Solar")
@@ -113,7 +113,7 @@ public class DraftManager
     }
     public string Mode(List<string> arguments)
     {
-        string mode = arguments[1];
+        string mode = arguments[0];
         switch (mode)
         {
             case "Full":
@@ -126,12 +126,12 @@ public class DraftManager
                 this.mode = mode;
                 break;
         }
-        string result = $"Successfully changed working mode to {arguments[1]} Mode";
+        string result = $"Successfully changed working mode to {arguments[0]} Mode";
         return result;
     }
     public string Check(List<string> arguments)
     {
-        string id = arguments[1];
+        string id = arguments[0];
         var sb = new StringBuilder();
         if (providers.Any(x => x.Id == id))
         {

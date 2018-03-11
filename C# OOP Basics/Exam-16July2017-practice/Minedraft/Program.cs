@@ -9,9 +9,10 @@ class Program
         DraftManager draftManager = new DraftManager();
         while (true)
         {
-            List<string> commandsArgs = Console.ReadLine().Split().ToList();
+            string[] input = Console.ReadLine().Split();
+            List<string> commandsArgs = input.Skip(1).ToList();
 
-            switch (commandsArgs[0])
+            switch (input[0])
             {
                 case "RegisterHarvester":
                     Console.WriteLine(draftManager.RegisterHarvester(commandsArgs));
@@ -33,7 +34,7 @@ class Program
                     break;
             }
 
-            if (commandsArgs[0] == "Shutdown")
+            if (input[0] == "Shutdown")
             {
                 break;
             }
