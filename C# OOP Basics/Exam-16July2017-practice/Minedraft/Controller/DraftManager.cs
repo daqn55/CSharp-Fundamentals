@@ -6,16 +6,16 @@ using System.Text;
 
 public class DraftManager
 {
-    private List<Harvester> harvesters;
     private List<Provider> providers;
-    private string mode;
+    private List<Harvester> harvesters;
     private const string exceptionHarvesterRegister = "Harvester is not registered, because of it's ";
     private const string exceptionProvidersRegister = "Provider is not registered, because of it's ";
+    private string mode;
 
     public DraftManager()
     {
-        this.harvesters = new List<Harvester>();
         this.providers = new List<Provider>();
+        this.harvesters = new List<Harvester>();
         this.TotalStoredEnergy = 0;
         this.TotalMinedOre = 0;
         this.mode = "Full";
@@ -28,21 +28,9 @@ public class DraftManager
     {
         string type = arguments[0];
         string id = arguments[1];
-        double oreOutput = double.Parse(arguments[2]);
-        double energyRequirement = double.Parse(arguments[3]);
         try
         {
-            if (type == "Sonic")
-            {
-                int sonicFactor = int.Parse(arguments[4]);
-                SonicHarvester sonicHarvester = new SonicHarvester(id, oreOutput, energyRequirement, sonicFactor);
-                harvesters.Add(sonicHarvester);
-            }
-            else if (type == "Hammer")
-            {
-                HammerHarvester hammerHarvester = new HammerHarvester(id, oreOutput, energyRequirement);
-                harvesters.Add(hammerHarvester);
-            }
+            this.harvesters.Add(HarvesterFactory.RegisterHarvester(arguments));
         }
         catch (ArgumentException a)
         {
@@ -51,23 +39,14 @@ public class DraftManager
         string successfullRegister = $"Successfully registered {type} Harvester - {id}";
         return successfullRegister;
     }
+
     public string RegisterProvider(List<string> arguments)
     {
         string type = arguments[0];
         string id = arguments[1];
-        double energyOutput = double.Parse(arguments[2]);
         try
         {
-            if (type == "Solar")
-            {
-                SolarProvider solarProvider = new SolarProvider(id, energyOutput);
-                providers.Add(solarProvider);
-            }
-            else if (type == "Pressure")
-            {
-                PressureProvider pressureProvider = new PressureProvider(id, energyOutput);
-                providers.Add(pressureProvider);
-            }
+            providers.Add(ProviderFactory.RegisterProvider(arguments));
         }
         catch (ArgumentException a)
         {
@@ -76,6 +55,7 @@ public class DraftManager
         string successfullRegister = $"Successfully registered {type} Provider - {id}";
         return successfullRegister;
     }
+
     public string Day()
     {
         double totalEnergyForTheDay = 0;
@@ -111,6 +91,7 @@ public class DraftManager
             .Append($"Plumbus Ore Mined: {totalOreForTheDay}");
         return sb.ToString();
     }
+
     public string Mode(List<string> arguments)
     {
         string mode = arguments[0];
@@ -129,6 +110,7 @@ public class DraftManager
         string result = $"Successfully changed working mode to {arguments[0]} Mode";
         return result;
     }
+
     public string Check(List<string> arguments)
     {
         string id = arguments[0];
@@ -168,6 +150,7 @@ public class DraftManager
             return sb.ToString();
         }
     }
+
     public string ShutDown()
     {
         var sb = new StringBuilder();

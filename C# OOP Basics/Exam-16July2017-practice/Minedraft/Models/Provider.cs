@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using System.Text;
 
-public abstract class Provider : IProviders
+public abstract class Provider : Minedraft, IProviders
 {
     private const int isNotZero = 0;
     private const int lessThanTenTousant = 10000;
     private const string exceptionEnergy = "EnergyOutput";
 
-    public Provider(string id, double energyOutput)
+    public Provider(string id, double energyOutput) : base(id)
     {
-        this.Id = id;
         this.EnergyOutput = energyOutput;
     }
-
-    public string Id { get; private set; }
 
     private double energyOutput;
 

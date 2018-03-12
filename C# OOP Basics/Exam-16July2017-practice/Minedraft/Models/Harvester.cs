@@ -3,21 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 
 
-public abstract class Harvester : IHarvester
+public abstract class Harvester : Minedraft, IHarvester
 {
     private const int isNotNegative = 0;
     private const int isNotOverBigNum = 20000;
     private const string exceptionOre = "OreOutput";
     private const string exceptionEnergy = "EnergyRequirement";
 
-    public Harvester(string id, double oreOutput, double energyRequirement)
+    public Harvester(string id, double oreOutput, double energyRequirement) : base(id)
     {
-        this.Id = id;
         this.OreOutput = oreOutput;
         this.EnergyRequirement = energyRequirement;
     }
 
-    public string Id { get; private set; }
     private double oreOutput;
     private double energyRequirement;
 
