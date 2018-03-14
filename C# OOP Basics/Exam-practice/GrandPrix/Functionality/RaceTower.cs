@@ -6,8 +6,7 @@ using System.Text;
 
 public class RaceTower
 {
-    private Tyre tyre;
-    private List<Driver> drivers = new List<Driver>();
+    private List<Driver> drivers;
     private int currentLap;
     private string weather;
     private Dictionary<string, string> driversWhosLostTheRace = new Dictionary<string, string>();
@@ -19,6 +18,7 @@ public class RaceTower
     public RaceTower()
     {
         this.weather = "Sunny";
+        drivers = new List<Driver>();
     }
 
     public void SetTrackInfo(int lapsNumber, int trackLength)
@@ -30,32 +30,7 @@ public class RaceTower
     {
         try
         {
-            var name = commandArgs[2];
-            var hp = int.Parse(commandArgs[3]);
-            var fuelAmount = double.Parse(commandArgs[4]);
-            var tyreType = commandArgs[5];
-            var tyreHardness = double.Parse(commandArgs[6]);
-
-            if (tyreType == "Ultrasoft")
-            {
-                var grip = double.Parse(commandArgs[7]);
-                tyre = new UltrasoftTyre(tyreHardness, grip);
-            }
-            else if (tyreType == "Hard")
-            {
-                tyre = new HardTyre(tyreHardness);
-            }
-
-            Car car = new Car(hp, fuelAmount, tyre);
-
-            if (commandArgs[1] == "Aggressive")
-            {
-                drivers.Add(new AggressiveDriver(name, car));
-            }
-            else if (commandArgs[1] == "Endurance")
-            {
-                drivers.Add(new EnduranceDriver(name, car));
-            }
+            drivers.Add(DriverFactory.CreateDriver(commandArgs));
         }
         catch (ArgumentException a)
         {
@@ -65,22 +40,22 @@ public class RaceTower
 
     public void DriverBoxes(List<string> commandArgs)
     {
-        drivers.Find(d => d.Name == commandArgs[2]).TotalTime += 20;
-        switch (commandArgs[1])
+        drivers.Find(d => d.Name == commandArgs[1]).TotalTime += 20;
+        switch (commandArgs[0])
         {
             case "Refuel":
-                drivers.Find(d => d.Name == commandArgs[2]).Car.Refuel(double.Parse(commandArgs[3]));
+                drivers.Find(d => d.Name == commandArgs[1]).Car.Refuel(double.Parse(commandArgs[2]));
                 break;
             case "ChangeTyres":
-                if (commandArgs[3] == "Hard")
+                if (commandArgs[2] == "Hard")
                 {
-                    drivers.Find(d => d.Name == commandArgs[2])
-                        .Car.ChangeTyre(new HardTyre(double.Parse(commandArgs[4])));
+                    drivers.Find(d => d.Name == commandArgs[1])
+                        .Car.ChangeTyre(new HardTyre(double.Parse(commandArgs[3])));
                 }
-                else if (commandArgs[3] == "Utrasoft")
+                else if (commandArgs[2] == "Utrasoft")
                 {
-                    drivers.Find(d => d.Name == commandArgs[2])
-                        .Car.ChangeTyre(new UltrasoftTyre(double.Parse(commandArgs[4]), double.Parse(commandArgs[5])));
+                    drivers.Find(d => d.Name == commandArgs[1])
+                        .Car.ChangeTyre(new UltrasoftTyre(double.Parse(commandArgs[3]), double.Parse(commandArgs[4])));
                 }
                 break;
         }
@@ -91,7 +66,8 @@ public class RaceTower
         try
         {
 
-            int numberOfLaps = int.Parse(commandArgs[1]);
+            int numberOfLaps = int.Parse(commandArgs[0]);
+            var sb = new StringBuilder();
             if (numberOfLaps > this.LapsNumber)
             {
                 throw new ArgumentException($"There is no time! On lap {this.currentLap}.");
@@ -105,7 +81,7 @@ public class RaceTower
                     {
                         try
                         {
-                            drivers[z].TotalTime += 60 / (this.TrackLength / drivers[z].Speed());
+                            drivers[z].TotalTime += 60M / ((decimal)this.TrackLength / drivers[z].Speed());
                             drivers[z].Car.ReduceFuel(this.TrackLength, drivers[z].FuelConsumptionPerKm);
                             drivers[z].Car.Tyre.ReduceDegradation();
                         }
@@ -113,6 +89,7 @@ public class RaceTower
                         {
                             driversWhosLostTheRace.Add(drivers[z].Name, a.Message);
                             drivers.RemoveAt(z);
+                            z -= 1;
                         }
                     }
 
@@ -120,15 +97,26 @@ public class RaceTower
                     {
                         drivers = drivers.OrderBy(x => x.TotalTime).ToList();
 
-                        bool aggressiveUltrasoftDriver = drivers[y].GetType().Name == "AggressiveDriver" && drivers[y].Car.Tyre.Name == "Utrasoft";
-                        bool enduranceHardTyreDriver = drivers[y].GetType().Name == "EnduranceDriver" && drivers[y].Car.Tyre.Name == "Hard";
+                        bool aggressiveUltrasoftDriver = drivers[y-1].GetType().Name == "AggressiveDriver" && drivers[y-1].Car.Tyre.Name == "Utrasoft";
+                        bool aggressiveUltrasoftDriverFirst = drivers[y].GetType().Name == "AggressiveDriver" && drivers[y].Car.Tyre.Name == "Utrasoft";
+                        bool enduranceHardTyreDriverFirst = drivers[y].GetType().Name == "EnduranceDriver" && drivers[y].Car.Tyre.Name == "Hard";
+                        bool enduranceHardTyreDriver = drivers[y-1].GetType().Name == "EnduranceDriver" && drivers[y-1].Car.Tyre.Name == "Hard";
                         var diffrence = Math.Abs(drivers[y].TotalTime - drivers[y - 1].TotalTime);
-                        if (aggressiveUltrasoftDriver && diffrence <= 3) 
+                        if ((aggressiveUltrasoftDriver || aggressiveUltrasoftDriverFirst) && diffrence <= 3) 
                         {
+                            int driverToRemove = 0;
+                            if (aggressiveUltrasoftDriver)
+                            {
+                                driverToRemove = y - 1;
+                            }
+                            else
+                            {
+                                driverToRemove = y;
+                            }
                             if (weather == "Foggy")
                             {
-                                driversWhosLostTheRace.Add(drivers[y].Name, "Crashed");
-                                drivers.RemoveAt(y);
+                                driversWhosLostTheRace.Add(drivers[driverToRemove].Name, "Crashed");
+                                drivers.RemoveAt(driverToRemove);
                             }
                             else
                             {
@@ -137,12 +125,21 @@ public class RaceTower
                                 drivers[y - 1].TotalTime += 3;
                             }
                         }
-                        else if (enduranceHardTyreDriver && diffrence <= 3)
+                        else if ((enduranceHardTyreDriver || enduranceHardTyreDriverFirst) && diffrence <= 3)
                         {
+                            int driverToRemove = 0;
+                            if (enduranceHardTyreDriver)
+                            {
+                                driverToRemove = y - 1;
+                            }
+                            else
+                            {
+                                driverToRemove = y;
+                            }
                             if (weather == "Rainy")
                             {
-                                driversWhosLostTheRace.Add(drivers[y].Name, "Crashed");
-                                drivers.RemoveAt(y);
+                                driversWhosLostTheRace.Add(drivers[driverToRemove].Name, "Crashed");
+                                drivers.RemoveAt(driverToRemove);
                             }
                             else
                             {
@@ -162,7 +159,8 @@ public class RaceTower
                 if (this.currentLap == this.LapsNumber)
                 {
                     var winer = drivers.OrderBy(d => d.TotalTime).First();
-                    string result = $"{winer.Name} wins the race for {winer.TotalTime:f3} seconds.";
+                    var secondsForLap = 60 / (this.TrackLength / winer.Speed());
+                    string result = $"{winer.Name} wins the race for {(winer.TotalTime):f3} seconds.";
                     this.completeLapsResult = result;
                 }
             }
@@ -186,7 +184,7 @@ public class RaceTower
             count++;
         }
 
-        foreach (var f in driversWhosLostTheRace)
+        foreach (var f in driversWhosLostTheRace.Reverse())
         {
             sb.AppendLine($"{count} {f.Key} {f.Value}");
             count++;
@@ -197,7 +195,7 @@ public class RaceTower
 
     public void ChangeWeather(List<string> commandArgs)
     {
-        this.weather = commandArgs[1];
+        this.weather = commandArgs[0];
     }
 
 }

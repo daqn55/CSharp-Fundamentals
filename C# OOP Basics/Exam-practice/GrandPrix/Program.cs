@@ -13,9 +13,10 @@ class Program
         bool finishTheRace = true;
         while (finishTheRace)
         {
-            List<string> commandArgs = Console.ReadLine().Split().ToList();
+            string[] input = Console.ReadLine().Split();
+            List<string> commandArgs = input.Skip(1).ToList();
             
-            switch (commandArgs[0])
+            switch (input[0])
             {
                 case "RegisterDriver":
                     raceTower.RegisterDriver(commandArgs);

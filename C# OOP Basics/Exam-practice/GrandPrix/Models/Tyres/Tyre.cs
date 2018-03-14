@@ -4,7 +4,7 @@ public abstract class Tyre
 {
     private const int InitialValueDegradation = 100;
 
-    public Tyre(double hardness)
+    protected Tyre(double hardness)
     {
         this.Hardness = hardness;
         this.Degradation = InitialValueDegradation;
