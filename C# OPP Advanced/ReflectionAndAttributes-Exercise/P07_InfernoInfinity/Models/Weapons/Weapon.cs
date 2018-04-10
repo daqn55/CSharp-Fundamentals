@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-
+[CustomAtribute("Pesho", 3, "Used for C# OOP Advanced Course - Enumerations and Attributes.", "Pesho, Svetlio")]
 public abstract class Weapon
 {
     private int maxSockets;
