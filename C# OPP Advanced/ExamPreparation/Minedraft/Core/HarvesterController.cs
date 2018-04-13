@@ -50,7 +50,7 @@ public class HarvesterController : IHarvesterController
             {
                 harvester.Broke();
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 reminder.Add(harvester);
             }

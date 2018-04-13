@@ -2,9 +2,6 @@
 {
     private const int InitialDurability = 1000;
 
-    private double oreOutput;
-    private double energyRequirement;
-
     protected Provider(int id, double energyOutput)
     {
         this.ID = id;
