@@ -49,7 +49,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -59,6 +62,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Attributes\RefreshEntitiesAttribute.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\DayCommand.cs" />
+    <Compile Include="Commands\InspectCommand.cs" />
+    <Compile Include="Commands\ModeCommand.cs" />
+    <Compile Include="Commands\RegisterCommand.cs" />
+    <Compile Include="Commands\RepairCommand.cs" />
+    <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Core\CommandInterpreter.cs" />
     <Compile Include="Core\DraftManager.cs" />
