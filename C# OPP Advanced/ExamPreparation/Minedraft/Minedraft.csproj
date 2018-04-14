@@ -66,7 +66,9 @@
     <Compile Include="Commands\DayCommand.cs" />
     <Compile Include="Commands\InspectCommand.cs" />
     <Compile Include="Commands\ModeCommand.cs" />
-    <Compile Include="Commands\RegisterCommand.cs" />
+    <Compile Include="Commands\Register\HarvesterCommand.cs" />
+    <Compile Include="Commands\Register\ProviderCommand.cs" />
+    <Compile Include="Commands\Register\RegisterCommand.cs" />
     <Compile Include="Commands\RepairCommand.cs" />
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Constants\Constants.cs" />
