@@ -20,7 +20,7 @@
 
     public void Broke()
     {
-        if (this.Durability <= 0)
+        if (this.Durability < 0)
         {
             throw new System.Exception($"{this.GetType().Name} broked!");
         }

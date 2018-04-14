@@ -16,4 +16,9 @@ public class InfinityHarvester : Harvester
         get => this.durability;
         protected set => this.durability = Math.Max(0, value);
     }
+
+    public void RestoreDurability()
+    {
+        this.Durability = 1000;
+    }
 }

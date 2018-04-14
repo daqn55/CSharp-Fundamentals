@@ -75,6 +75,8 @@
     <Compile Include="Core\EnergyRepository.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\HarvesterController.cs" />
+    <Compile Include="Core\Reader.cs" />
+    <Compile Include="Core\Writer.cs" />
     <Compile Include="Entities\Harvesters\HammerHarvester.cs" />
     <Compile Include="Entities\Harvesters\Harvester.cs" />
     <Compile Include="Entities\Harvesters\InfinityHarvester.cs" />

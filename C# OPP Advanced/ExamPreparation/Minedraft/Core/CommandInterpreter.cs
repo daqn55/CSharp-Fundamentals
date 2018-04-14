@@ -33,35 +33,6 @@ public class CommandInterpreter : ICommandInterpreter
         object instance = Activator.CreateInstance(commandType, constrArgs);
 
         return commandType.GetMethod("Execute").Invoke(instance, null).ToString();
-
-        //switch (command)
-        //{
-        //    case "Register":
-        //        if (args[1] == "Harvester")
-        //        {
-        //            arguments = new List<string>(args.Skip(2).ToList());
-        //            return manager.RegisterHarvester(arguments);
-        //        }
-        //        else if (args[1] == "Provider")
-        //        {
-        //            arguments = new List<string>(args.Skip(2).ToList());
-        //            return manager.RegisterProvider(arguments);
-        //        }
-        //        break;
-        //    case "Day":
-        //        return manager.Day();
-        //    case "Mode":
-        //        arguments = new List<string>(args.Skip(1).ToList());
-        //        return manager.Mode(arguments);
-        //    case "Inspect":
-        //        arguments = new List<string>(args.Skip(1).ToList());
-        //        return manager.Inspect(arguments);
-        //    case "Repair":
-        //        arguments = new List<string>(args.Skip(1).ToList());
-        //        return manager.Repair(arguments);
-        //    default:
-        //        return manager.ShutDown();
-        //}
     }
 }
 

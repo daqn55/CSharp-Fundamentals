@@ -50,7 +50,7 @@ public class HarvesterController : IHarvesterController
             {
                 harvester.Broke();
             }
-            catch (Exception )
+            catch (Exception)
             {
                 reminder.Add(harvester);
             }
@@ -73,6 +73,15 @@ public class HarvesterController : IHarvesterController
         {
             oreProducedByTheDay = this.harvesters.Select(n => n.Produce()).Sum();
             this.OreProduced += oreProducedByTheDay;
+        }
+
+        foreach (var h in this.harvesters)
+        {
+            if (h is InfinityHarvester)
+            {
+                var infinityHarvester = (InfinityHarvester)h;
+                infinityHarvester.RestoreDurability();
+            }
         }
 
         return string.Format(Constants.OreOutputToday, oreProducedByTheDay);
