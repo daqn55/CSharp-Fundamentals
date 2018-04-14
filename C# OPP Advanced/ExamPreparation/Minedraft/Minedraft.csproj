@@ -71,7 +71,6 @@
     <Compile Include="Commands\ShutdownCommand.cs" />
     <Compile Include="Constants\Constants.cs" />
     <Compile Include="Core\CommandInterpreter.cs" />
-    <Compile Include="Core\DraftManager.cs" />
     <Compile Include="Core\EnergyRepository.cs" />
     <Compile Include="Core\Engine.cs" />
     <Compile Include="Core\HarvesterController.cs" />

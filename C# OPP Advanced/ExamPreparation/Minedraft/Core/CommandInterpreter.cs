@@ -8,11 +8,8 @@ using System.Threading.Tasks;
 
 public class CommandInterpreter : ICommandInterpreter
 {
-    private DraftManager manager;
-
     public CommandInterpreter(IHarvesterController harvesterController, IProviderController providerController)
     {
-        this.manager = new DraftManager();
         this.HarvesterController = harvesterController;
         this.ProviderController = providerController;
     }
