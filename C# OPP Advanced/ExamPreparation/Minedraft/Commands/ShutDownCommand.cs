@@ -19,6 +19,7 @@ public class ShutdownCommand : Command
         sb.AppendLine($"Total Energy Produced: {this.ProviderController.TotalEnergyProduced}");
         sb.AppendLine($"Total Mined Plumbus Ore: {this.HarvesterController.OreProduced}");
 
+		
         return sb.ToString().TrimEnd();
     }
 }
