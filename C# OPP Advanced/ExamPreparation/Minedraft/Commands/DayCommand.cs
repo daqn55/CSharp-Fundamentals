@@ -22,7 +22,7 @@ public class DayCommand : Command
         sb.AppendLine(energyProduced);
         sb.Append(oreProduced);
 
-        return sb.ToString().Trim();
+        return sb.ToString().TrimEnd();
     }
 }
 

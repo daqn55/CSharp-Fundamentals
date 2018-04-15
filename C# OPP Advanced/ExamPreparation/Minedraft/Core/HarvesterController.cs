@@ -35,24 +35,19 @@ public class HarvesterController : IHarvesterController
                 break;
         }
 
-        foreach (var h in this.harvesters)
-        {
-            var harvester = (Harvester)h;
-            harvester.ChangeMode(persents);
-            harvester.LoseDurability(100);
-        }
-
         List<IHarvester> reminder = new List<IHarvester>();
 
-        foreach (var harvester in this.harvesters)
+        foreach (var h in this.harvesters)
         {
             try
             {
-                harvester.Broke();
+                var harvester = (Harvester)h;
+                harvester.ChangeMode(persents);
+                h.Broke();
             }
             catch (Exception)
             {
-                reminder.Add(harvester);
+                reminder.Add(h);
             }
         }
 
@@ -77,12 +72,14 @@ public class HarvesterController : IHarvesterController
 
         foreach (var h in this.harvesters)
         {
-            if (h is InfinityHarvester)
+            var hasAttribute = Attribute.IsDefined(h.GetType(), typeof(RefreshEntitiesAttribute));
+            if (hasAttribute)
             {
-                var infinityHarvester = (InfinityHarvester)h;
-                infinityHarvester.RestoreDurability();
+                var infinityHarvester = (Harvester)h;
+                infinityHarvester.Durability = 1000;
             }
         }
+
 
         return string.Format(Constants.OreOutputToday, oreProducedByTheDay);
     }

@@ -13,9 +13,9 @@ public class CommandInterpreter : ICommandInterpreter
         this.HarvesterController = harvesterController;
         this.ProviderController = providerController;
     }
-    public IHarvesterController HarvesterController { get; private set; }
+    public IHarvesterController HarvesterController { get; }
 
-    public IProviderController ProviderController { get; private set; }
+    public IProviderController ProviderController { get; }
 
     public string ProcessCommand(IList<string> args)
     {
@@ -24,6 +24,16 @@ public class CommandInterpreter : ICommandInterpreter
 
         Assembly assembly = Assembly.GetExecutingAssembly();
         Type commandType = assembly.GetTypes().FirstOrDefault(t => t.Name == command + "Command");
+
+        if (commandType == null)
+        {
+            throw new ArgumentException("Command can't be null");
+        }
+
+        if (!typeof(ICommand).IsAssignableFrom(commandType))
+        {
+            throw new ArgumentException("Invalid command");
+        }
 
         object[] constrArgs = new object[] { arguments, this.HarvesterController, this.ProviderController };
 

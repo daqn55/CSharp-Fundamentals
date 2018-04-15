@@ -16,14 +16,17 @@
 
     public double EnergyRequirement { get; protected set; }
 
-    public virtual double Durability { get; protected set; }
+    public virtual double Durability { get; set; }
 
     public void Broke()
     {
+        this.Durability -= 100;
+
         if (this.Durability < 0)
         {
             throw new System.Exception($"{this.GetType().Name} broked!");
         }
+
     }
 
     public double Produce()
@@ -35,10 +38,5 @@
     {
         this.EnergyRequirement = (this.EnergyRequirement * persents) / 100;
         this.OreOutput = (this.OreOutput * persents) / 100;
-    }
-
-    public void LoseDurability(int durabilityToLose)
-    {
-        this.Durability -= durabilityToLose;
     }
 }

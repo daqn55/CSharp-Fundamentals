@@ -17,10 +17,13 @@
 
     public void Broke()
     {
-        if (this.Durability <= 0)
+        this.Durability -= 100;
+
+        if (this.Durability < 0)
         {
             throw new System.Exception($"{this.GetType().Name} broked!");
         }
+
     }
 
     public double Produce()

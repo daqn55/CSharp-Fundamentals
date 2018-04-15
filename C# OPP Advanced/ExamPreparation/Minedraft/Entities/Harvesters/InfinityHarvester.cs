@@ -1,5 +1,6 @@
 ﻿using System;
 
+[RefreshEntities]
 public class InfinityHarvester : Harvester
 {
     private const int OreOutputDivider = 10;
@@ -11,11 +12,11 @@ public class InfinityHarvester : Harvester
         this.OreOutput /= OreOutputDivider;
     }
 
-    public override double Durability
-    {
-        get => this.durability;
-        protected set => this.durability = Math.Max(0, value);
-    }
+    //public override double Durability
+    //{
+    //    get => this.durability;
+    //    set => this.durability = Math.Max(0, value);
+    //}
 
     public void RestoreDurability()
     {

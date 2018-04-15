@@ -41,7 +41,7 @@ public class InspectCommand : Command
             sb.AppendLine($"No entity found with id - {id}");
         }
 
-        return sb.ToString().Trim();
+        return sb.ToString().TrimEnd();
     }
 }
 
