@@ -14,13 +14,9 @@ public class ShutdownCommand : Command
 
     public override string Execute()
     {
-        var sb = new StringBuilder();
-        sb.AppendLine("System Shutdown");
-        sb.AppendLine($"Total Energy Produced: {this.ProviderController.TotalEnergyProduced}");
-        sb.AppendLine($"Total Mined Plumbus Ore: {this.HarvesterController.OreProduced}");
+        var result = string.Format(Constants.SystemShutdown, this.ProviderController.TotalEnergyProduced, this.HarvesterController.OreProduced);
 
-		
-        return sb.ToString().TrimEnd();
+        return result;
     }
 }
 

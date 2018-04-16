@@ -15,15 +15,15 @@ public class InspectCommand : Command
     public override string Execute()
     {
         var id = int.Parse(this.Arguments[0]);
-        var sb = new StringBuilder();
+        var result = string.Empty;
         bool haveId = false;
 
         var providerController = (ProviderController)this.ProviderController;
         if (providerController.Entities.Any(x => x.ID == id))
         {
             var provider = providerController.Entities.First(x => x.ID == id);
-            sb.AppendLine(provider.GetType().Name);
-            sb.AppendLine($"Durability: {provider.Durability}");
+
+            result = string.Format(Constants.EntityFound, provider.GetType().Name, provider.Durability);
             haveId = true;
         }
 
@@ -31,17 +31,16 @@ public class InspectCommand : Command
         if (harvesterController.Entities.Any(x => x.ID == id))
         {
             var harvester = harvesterController.Entities.First(x => x.ID == id);
-            sb.AppendLine(harvester.GetType().Name);
-            sb.AppendLine($"Durability: {harvester.Durability}");
+            result = string.Format(Constants.EntityFound, harvester.GetType().Name, harvester.Durability);
             haveId = true;
         }
 
-        if (!haveId || string.IsNullOrWhiteSpace(sb.ToString()))
+        if (!haveId || string.IsNullOrWhiteSpace(result))
         {
-            sb.AppendLine($"No entity found with id - {id}");
+            result = string.Format(Constants.NoEntity, id);
         }
 
-        return sb.ToString().TrimEnd();
+        return result;
     }
 }
 

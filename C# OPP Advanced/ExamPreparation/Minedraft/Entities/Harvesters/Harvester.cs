@@ -1,6 +1,8 @@
 ﻿public abstract class Harvester : IHarvester
 {
     private const int InitialDurability = 1000;
+    private double originOreOutput = 0;
+    private double originEnergyReq = 0;
 
     protected Harvester(int id, double oreOutput, double energyRequirement)
     {
@@ -36,6 +38,14 @@
 
     public void ChangeMode(int persents)
     {
+        if (this.EnergyRequirement > this.originEnergyReq)
+        {
+            this.originOreOutput = this.OreOutput;
+            this.originEnergyReq = this.EnergyRequirement;
+        }
+        this.EnergyRequirement = this.originEnergyReq;
+        this.OreOutput = this.originOreOutput;
+
         this.EnergyRequirement = (this.EnergyRequirement * persents) / 100;
         this.OreOutput = (this.OreOutput * persents) / 100;
     }

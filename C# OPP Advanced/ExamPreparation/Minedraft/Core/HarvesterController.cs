@@ -43,7 +43,10 @@ public class HarvesterController : IHarvesterController
             {
                 var harvester = (Harvester)h;
                 harvester.ChangeMode(persents);
-                h.Broke();
+                //if (!(h is InfinityHarvester))
+                //{
+                    h.Broke();
+                //}
             }
             catch (Exception)
             {
