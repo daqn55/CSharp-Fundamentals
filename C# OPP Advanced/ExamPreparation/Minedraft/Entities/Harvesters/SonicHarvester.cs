@@ -9,4 +9,6 @@
         this.EnergyRequirement /= EnergyRequirementDivider;
         this.Durability -= DurabilityLoss;
     }
+
+
 }

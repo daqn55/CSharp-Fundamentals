@@ -13,7 +13,7 @@
 
     public double EnergyOutput { get; protected set; }
 
-    public virtual double Durability { get; protected set; }
+    public virtual double Durability { get; set; }
 
     public void Broke()
     {

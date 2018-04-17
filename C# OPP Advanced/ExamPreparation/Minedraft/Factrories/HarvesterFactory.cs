@@ -13,7 +13,7 @@ public class HarvesterFactory : IHarvesterFactory
         var oreOutput = double.Parse(args[2]);
         var energyReq = double.Parse(args[3]);
 
-        Type clazz = Assembly.GetExecutingAssembly().GetTypes().FirstOrDefault(t => t.Name == type + "Harvester");
+        Type clazz = Assembly.GetCallingAssembly().GetTypes().FirstOrDefault(t => t.Name == type + "Harvester");
         var ctors = clazz.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
         Harvester harvester = (Harvester)ctors[0].Invoke(new object[] { id, oreOutput, energyReq });
         return harvester;

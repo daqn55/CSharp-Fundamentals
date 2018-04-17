@@ -14,5 +14,6 @@ public class SolarProvider : Provider
     {
         this.Durability += DurabilityIncreased;
     }
+
 }
 
