@@ -11,6 +11,5 @@ public class StandartProvider : Provider
         : base(id, energyOutput)
     {
     }
-
 }
 

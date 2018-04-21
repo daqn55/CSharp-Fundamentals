@@ -9,5 +9,4 @@
         this.OreOutput *= OreOutputMultiplier;
         this.EnergyRequirement *= EnergyRequirementMultiplier;
     }
-
 }

@@ -8,9 +8,15 @@ using System.Threading.Tasks;
 public class HarvesterCommand : Command
 {
     public HarvesterCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController) 
-        : base(arguments, harvesterController, providerController)
+        : base(arguments)
     {
+        this.HarvesterController = harvesterController;
+        this.ProviderController = providerController;
     }
+
+    public IHarvesterController HarvesterController { get; private set; }
+
+    public IProviderController ProviderController { get; private set; }
 
     public override string Execute()
     {

@@ -43,10 +43,7 @@ public class HarvesterController : IHarvesterController
             {
                 var harvester = (Harvester)h;
                 harvester.ChangeMode(persents);
-                //if (!(h is InfinityHarvester))
-                //{
-                    h.Broke();
-                //}
+                h.Broke();
             }
             catch (Exception)
             {
@@ -73,15 +70,15 @@ public class HarvesterController : IHarvesterController
             this.OreProduced += oreProducedByTheDay;
         }
 
-        foreach (var h in this.harvesters)
-        {
-            var hasAttribute = Attribute.IsDefined(h.GetType(), typeof(RefreshEntitiesAttribute));
-            if (hasAttribute)
-            {
-                var infinityHarvester = (Harvester)h;
-                infinityHarvester.Durability = 1000;
-            }
-        }
+        //foreach (var h in this.harvesters)
+        //{
+        //    var hasAttribute = Attribute.IsDefined(h.GetType(), typeof(RefreshEntitiesAttribute));
+        //    if (hasAttribute)
+        //    {
+        //        var infinityHarvester = (Harvester)h;
+        //        infinityHarvester.Durability = 1000;
+        //    }
+        //}
 
 
         return string.Format(Constants.OreOutputToday, oreProducedByTheDay);

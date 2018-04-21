@@ -8,9 +8,28 @@ using System.Threading.Tasks;
 
 public class RegisterCommand : Command
 {
+    [Inject]
+    private IHarvesterController harvesterController;
+    [Inject]
+    private IProviderController providerController;
+
     public RegisterCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController) 
-        : base(arguments, harvesterController, providerController)
+        : base(arguments)
     {
+        this.HarvesterController = harvesterController;
+        this.ProviderController = providerController;
+    }
+
+    public IHarvesterController HarvesterController
+    {
+        get { return harvesterController; }
+        private set { harvesterController = value; }
+    }
+
+    public IProviderController ProviderController
+    {
+        get { return providerController; }
+        private set { providerController = value; }
     }
 
     public override string Execute()

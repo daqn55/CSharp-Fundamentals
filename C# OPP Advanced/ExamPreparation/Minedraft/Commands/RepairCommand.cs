@@ -7,9 +7,19 @@ using System.Threading.Tasks;
 
 public class RepairCommand : Command
 {
-    public RepairCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController)
-        : base(arguments, harvesterController, providerController)
+    [Inject]
+    private IProviderController providerController;
+
+    public RepairCommand(IList<string> arguments, IProviderController providerController)
+        : base(arguments)
     {
+        this.ProviderController = providerController;
+    }
+
+    public IProviderController ProviderController
+    {
+        get { return providerController; }
+        private set { providerController = value; }
     }
 
     public override string Execute()

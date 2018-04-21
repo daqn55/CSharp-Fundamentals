@@ -5,21 +5,16 @@ using System.Linq;
 public class Engine
 {
     private ICommandInterpreter commandInterpreter;
-    private IHarvesterController harvesterController;
-    private IProviderController providerController;
-    private IEnergyRepository energyRepository;
     private IReader reader;
     private IWriter writer;
 
-    public Engine()
+    public Engine(ICommandInterpreter commandInterpreter, IReader reader, IWriter writer)
     {
-        this.reader = new Reader();
-        this.writer = new Writer();
-        this.energyRepository = new EnergyRepository();
-        this.harvesterController = new HarvesterController(this.energyRepository);
-        this.providerController = new ProviderController(this.energyRepository);
-        this.commandInterpreter = new CommandInterpreter(this.harvesterController, this.providerController);
+        this.commandInterpreter = commandInterpreter;
+        this.reader = reader;
+        this.writer = writer;
     }
+
     public void Run()
     {
         while (true)

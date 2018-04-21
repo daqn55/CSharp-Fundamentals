@@ -7,9 +7,19 @@ using System.Threading.Tasks;
 
 public class ModeCommand : Command
 {
-    public ModeCommand(IList<string> arguments, IHarvesterController harvesterController, IProviderController providerController) 
-        : base(arguments, harvesterController, providerController)
+    [Inject]
+    private IHarvesterController harvesterController;
+
+    public ModeCommand(IList<string> arguments, IHarvesterController harvesterController) 
+        : base(arguments)
     {
+        this.HarvesterController = harvesterController;
+    }
+
+    public IHarvesterController HarvesterController
+    {
+        get { return harvesterController; }
+        private set { harvesterController = value; }
     }
 
     public override string Execute()

@@ -8,21 +8,22 @@ using System.Threading.Tasks;
 
 public class CommandInterpreter : ICommandInterpreter
 {
-    public CommandInterpreter(IHarvesterController harvesterController, IProviderController providerController)
+    public CommandInterpreter(IServiceProvider serviceProvider)
     {
-        this.HarvesterController = harvesterController;
-        this.ProviderController = providerController;
+        this.ServiceProvider = serviceProvider;
     }
-    public IHarvesterController HarvesterController { get; }
+    public IServiceProvider ServiceProvider { get; }
 
-    public IProviderController ProviderController { get; }
+    public IHarvesterController HarvesterController { get; private set; }
+
+    public IProviderController ProviderController { get; private set; }
 
     public string ProcessCommand(IList<string> args)
     {
         List<string> arguments = new List<string>(args.Skip(1));
         var command = args[0];
 
-        Assembly assembly = Assembly.GetExecutingAssembly();
+        Assembly assembly = Assembly.GetCallingAssembly();
         Type commandType = assembly.GetTypes().FirstOrDefault(t => t.Name == command + "Command");
 
         if (commandType == null)
@@ -35,7 +36,13 @@ public class CommandInterpreter : ICommandInterpreter
             throw new ArgumentException("Invalid command");
         }
 
-        object[] constrArgs = new object[] { arguments, this.HarvesterController, this.ProviderController };
+        FieldInfo[] fieldsToInject = commandType.GetFields(BindingFlags.NonPublic | BindingFlags.Instance)
+            .Where(f => f.CustomAttributes.Any(ca => ca.AttributeType == typeof(InjectAttribute))).ToArray();
+
+        object[] injectArgs = fieldsToInject
+            .Select(f => this.ServiceProvider.GetService(f.FieldType)).ToArray();
+
+        object[] constrArgs = new object[] { arguments }.Concat(injectArgs).ToArray();
 
         object instance = Activator.CreateInstance(commandType, constrArgs);
 
