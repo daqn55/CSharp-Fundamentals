@@ -10,6 +10,8 @@ namespace _6.Traffic_Jam
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Math.Ceiling(1.1));
+
             int n = int.Parse(Console.ReadLine());
 
             string input = Console.ReadLine();
